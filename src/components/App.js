@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button.js';
 import '../scss/App.scss';
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
           {/* LIST OF DATA COMPONENTS */}
   
           {/* 'ADD' BUTTON COMPONENT */}
-  
+          <Button />
         </main>
       </div>
     );

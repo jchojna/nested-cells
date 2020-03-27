@@ -3,3 +3,8 @@
   display: flex;
   justify-content: center;
 }
+
+@mixin gradient($color1, $color2, $rotation) {
+  background: $color1;
+  background: linear-gradient(#{$rotation}deg, $color1 0%, $color2 100%);
+}

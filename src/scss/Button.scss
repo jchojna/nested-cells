@@ -1,0 +1,32 @@
+@import './mixins';
+@import './variables';
+
+.Button {
+  @include flex-center;
+  @include gradient ($color-cyan, $color-green, 0);
+  background-origin: border-box;
+  border: none;
+  border-radius: 50%;
+  box-shadow:
+    0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+    0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+    0 0.2em 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.4);
+  color: #fff;
+  cursor: pointer;
+  font-size: 4rem;
+  height: 1.2em;
+  line-height: 0;
+  margin-top: 2rem;
+  outline: none;
+  text-shadow: 0 2px 4px rgba($color: $color-dark, $alpha: 0.3);
+  transition: box-shadow 0.2s, transform 0.2s;
+  width: 1.2em;
+
+  &:hover {
+    box-shadow:
+      0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+      0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+      0 0.3em 0.25em 0.2em rgba($color: $color-cyan, $alpha: 0.3);
+    transform: translateY(-0.05em);
+  }
+}
