@@ -16,10 +16,10 @@ class App extends Component {
   
           {/* APP LOGO */}
   
-          <h1>Recruitment Task</h1>
+          <h1 className="App__heading">Recruitment Task</h1>
         </header>
         <main className="App__container">
-          <h2>People</h2>
+          <h2 className="App__title">People</h2>
   
           {/* LIST OF DATA COMPONENTS */}
   
