@@ -29,6 +29,7 @@ const Popup = (props) => {
           ref={category}
           type="text"
           className="Popup__input"
+          required
         />
         {/* VALUE */}
         <label htmlFor="popupCategory" className="Popup__label">
@@ -39,6 +40,7 @@ const Popup = (props) => {
           ref={value}
           type="text"
           className="Popup__input"
+          required
         />
         {/* BUTTONS */}
         <button
