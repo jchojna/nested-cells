@@ -71,13 +71,13 @@ class App extends Component {
 
           { // LIST OF CELLS
             cells.map(cell => {
-              const { id, category, value } = cell;
+              const { id, category, values } = cell;
               return (
                 <Cell
                   key={id}
                   id={id}
                   category={category}
-                  value={value}
+                  values={values}
                   onCellRemove={this.removeCell}
                   renderRemoveSvg={this.renderRemoveSvg}
                 />

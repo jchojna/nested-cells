@@ -5,7 +5,7 @@ const Cell = (props) => {
   const {
     id,
     category,
-    value,
+    values,
     onCellRemove,
     renderRemoveSvg
   } = props;
@@ -13,7 +13,7 @@ const Cell = (props) => {
   return (
     <section className="Cell">
       <h3 className="Cell__heading">
-        {`${category} ${value}`}
+        {`${category} ${values}`}
       </h3>
 
       { // REMOVE BUTTON
