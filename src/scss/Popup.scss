@@ -1,0 +1,31 @@
+@import './mixins';
+@import './variables';
+
+.Popup {
+  @include flex-center;
+  background-color: rgba($color: #000, $alpha: 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  &__form {
+    background-color: #fff;
+    border-radius: $corner-radius;
+    display: grid;
+    gap: 0.5rem;
+    padding: 3rem;
+  }
+
+  &__heading {
+    justify-self: center;
+    color: $color-dark;
+    margin: 0;
+  }
+
+  &__input {
+
+  }
+}
