@@ -2,27 +2,44 @@
 @import './variables';
 
 .Cell {
+  @include gradient ($color-violet, $color-lilac, 0);
   align-items: center;
+  background-size: 10px;
+  background-repeat: no-repeat;
   box-shadow: $shadow-cell;
   border-radius: $corner-radius;
   color: $color-dark;
   display: flex;
   justify-content: space-between;
   margin: 1rem 0;
-  overflow: hidden;
+  margin-left: $width-rootCell / 2 + $offset-cell;
+  min-width: 360px;
+  max-width: 400px;
   padding: 1.2em;
   padding-left: 2em;
   position: relative;
-  width: 100%;
 
   &::before {
-    @include gradient ($color-violet, $color-lilac, 0);
+    background-color: $color-light;
     content: '';
+    height: 1px;
+    left: $offset-cell * -1;
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 10px;
+    top: 50%;
+    width: $offset-cell;
+  }
+
+  &::after {
+    color: $color-light;
+    content: 'And';
+    font-size: 1.1em;
+    font-weight: 400;
+    left: $offset-cell * -1 - 50px;
+    line-height: 1;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: $offset-cell + 50px;
   }
 
   &__heading {
