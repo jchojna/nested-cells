@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Button from './Button.js';
+import classNames from 'classnames';
+import Cell from './Cell.js';
+import Popup from './Popup.js';
+import { v4 as uuidv4 } from 'uuid';
 import '../scss/App.scss';
 
 class App extends Component {
