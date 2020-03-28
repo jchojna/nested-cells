@@ -1,15 +1,61 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import '../scss/Popup.scss';
 
-const Popup = () => {
+const Popup = (props) => {
+  const { onPopupCancel, onPopupSubmit } = props;
+  const category = React.createRef();
+  const value = React.createRef();
+
+  const handlePopupSubmit = (e) => {
+    e.preventDefault();
+    onPopupSubmit({
+      id: uuidv4(),
+      category: category.current.value,
+      value: value.current.value
+    });
+  }
 
   return (
-    <section className="Popup">
-      <div className="Popup__container">
-        <h2 className="Popup__heading">Create new cell</h2>
-        <input type="text" className="Popup__input"/>
-      </div>
-    </section>
+    <div className="Popup">
+      <form className="Popup__form" onSubmit={handlePopupSubmit}>
+        <h2 className="Popup__heading">Add Property</h2>
+        {/* CATEGORY */}
+        <label htmlFor="popupCategory" className="Popup__label">
+          Category:
+        </label>
+        <input
+          id="popupCategory"
+          ref={category}
+          type="text"
+          className="Popup__input"
+        />
+        {/* VALUE */}
+        <label htmlFor="popupCategory" className="Popup__label">
+          Value:
+        </label>
+        <input
+          id="popupCategory"
+          ref={value}
+          type="text"
+          className="Popup__input"
+        />
+        {/* BUTTONS */}
+        <button
+          type="submit"
+          className="Popup__button Popup__button--submit"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          className="Popup__button Popup__button--cancel"
+          onClick={onPopupCancel}
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
   );
 }
 export default Popup;
