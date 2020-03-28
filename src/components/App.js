@@ -15,8 +15,23 @@ class App extends Component {
     }
   }
 
-  handlePopup = () => {
-    this.setState({ isPopupVisible: true });
+  togglePopup = () => {
+    this.setState(prevState => ({
+      isPopupVisible: !prevState.isPopupVisible
+    }));
+  }
+
+  addCell = (newCell) => {
+
+    this.setState(prevState => ({
+      cells: [
+        ...prevState.cells,
+        newCell
+      ]
+    }));
+
+
+    this.togglePopup();
   }
 
   render() {
@@ -34,21 +49,27 @@ class App extends Component {
           <h2 className="App__title">People</h2>
           {/* LIST OF CELLS */}
           {
-          cells.map(cell => {
-            return (
-              <Cell key={cell}/>
-            );
-          })
+            cells.map(cell => {
+              return (
+                <Cell key={cell.id}/>
+              );
+            })
           }
           {/* ADD CELL BUTTON */}
           <button
             className="button button--add button--main"
-            onClick={this.handlePopup}
+            onClick={this.togglePopup}
           >
             +
           </button>
           {/* POPUP */}
-          { isPopupVisible && <Popup /> }
+          {
+            isPopupVisible &&
+            <Popup
+              onPopupCancel={this.togglePopup}
+              onPopupSubmit={this.addCell}
+            /> 
+          }
         </main>
       </div>
     );
