@@ -9,11 +9,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isPopupVisible: false,
+      cells: []
 
     }
   }
 
+  handlePopup = () => {
+    this.setState({ isPopupVisible: true });
+  }
+
   render() {
+    const { isPopupVisible, cells } = this.state;
+
     return (
       <div className="App">
         <header className="App__header">
@@ -21,11 +29,23 @@ class App extends Component {
         </header>
         <main className="App__container">
           <h2 className="App__title">People</h2>
-  
-          {/* LIST OF DATA COMPONENTS */}
-  
-          {/* 'ADD' BUTTON COMPONENT */}
-          <Button />
+          {/* LIST OF CELLS */}
+          {
+          cells.map(cell => {
+            return (
+              <Cell key={cell}/>
+            );
+          })
+          }
+          {/* ADD CELL BUTTON */}
+          <button
+            className="button button--add button--main"
+            onClick={this.handlePopup}
+          >
+            +
+          </button>
+          {/* POPUP */}
+          { isPopupVisible && <Popup /> }
         </main>
       </div>
     );
