@@ -3,7 +3,7 @@
 
 .App {
   @include flex-center;
-  background-color: $color-lightLilac;
+  background-color: $color-light;
   flex-direction: column;
   margin: 0;
   min-height: 100vh;
@@ -21,41 +21,6 @@
     font-weight: 700;
     margin: 0;
     margin-bottom: 3rem;
-  }
-
-  &__container {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: $corner-radius;
-    padding: $padding-container;
-    position: relative;
-
-    &::before {
-      background-color: $color-light;
-      bottom: $padding-container;
-      content: '';
-      left: $width-rootCell / 2 + $padding-container;
-      position: absolute;
-      top: $padding-container;
-      width: 1px;
-    }
-  }
-
-  &__title {
-    @include flex-center;
-    @include gradient ($color-violet, $color-lilac, 0);
-    border-radius: $corner-radius;
-    box-shadow: $shadow-cell;
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0;
-    margin-bottom: 2.5rem;
-    padding: 0.9em;
-    width: $width-rootCell;
-    z-index: 1;
   }
 }
 

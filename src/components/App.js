@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import Tree from './Tree.js';
 import Cell from './Cell.js';
 import Popup from './Popup.js';
 import { v4 as uuidv4 } from 'uuid';
@@ -58,6 +59,92 @@ class App extends Component {
     </svg>
   }
 
+
+
+
+
+
+
+
+
+  renderCell = (id, parentId) => {
+    const { cells } = this.state;
+
+    const isMain = parentId === 'main';
+    const isNested = isMain && cells.find(cell => cell.id === id).values.length > 1;
+
+
+    if (isNested) {
+      
+      const { category, values } = cells.find(cell => cell.id === id);
+
+      return <Cell
+        key={id}
+        id={id}
+        onCellRemove={this.removeCell}
+        renderRemoveSvg={this.renderRemoveSvg}
+      >
+        <Tree
+          parentName={category}
+          parentId={id}
+          childNodes={values}
+          renderAddSvg={this.renderAddSvg}
+          onAddButtonClick={() => {console.log('add')}}
+          renderCell={this.renderCell}
+        />
+      </Cell>
+
+    } else {
+
+      if (isMain) {
+
+        const cell = cells.find(cell => cell.id === id);
+        const { category } = cell;
+        const value = cell.values[0].value;
+
+        return <Cell
+          key={id}
+          id={id}
+          onCellRemove={this.removeCell}
+          renderRemoveSvg={this.renderRemoveSvg}
+        >
+          <h3 className="Cell__heading">
+            {`${category} ${value}`}
+          </h3>
+        </Cell>
+
+      } else {
+
+        const value = cells
+        .find(cell => cell.id === parentId)
+        .values
+        .find(value => value.id === id)
+        .value;
+
+        return <Cell
+          key={id}
+          id={id}
+          onCellRemove={this.removeCell}
+          renderRemoveSvg={this.renderRemoveSvg}
+        >
+          <h3 className="Cell__heading">
+            {value}
+          </h3>
+        </Cell>
+
+      }
+    }      
+  }
+
+
+
+
+
+
+
+
+
+
   render() {
     const { isPopupVisible, cells } = this.state;
 
@@ -66,43 +153,25 @@ class App extends Component {
         <header className="App__header">
           <h1>Nested Cells</h1>
         </header>
-        <main className="App__container">
-          <h2 className="App__title">People</h2>
 
-          { // LIST OF CELLS
-            cells.map(cell => {
-              const { id, category, values } = cell;
-              return (
-                <Cell
-                  key={id}
-                  id={id}
-                  category={category}
-                  values={values}
-                  onCellRemove={this.removeCell}
-                  renderRemoveSvg={this.renderRemoveSvg}
-                />
-              );
-            })
-          }
+        <Tree
+          parentName="People"
+          parentId="main"
+          childNodes={cells}
+          renderAddSvg={this.renderAddSvg}
+          onAddButtonClick={this.togglePopup}
+          renderCell={this.renderCell}
+        />
 
-          {/* ADD CELL BUTTON */}
-            <button
-              className="button button--add button--main"
-              onClick={this.togglePopup}
-            >
-              { this.renderAddSvg() }
-            </button>
-
-          { // POPUP
-            isPopupVisible &&
-            <Popup
-              onPopupCancel={this.togglePopup}
-              onPopupSubmit={this.addCell}
-              renderAddSvg={this.renderAddSvg}
-              renderRemoveSvg={this.renderRemoveSvg}
-            /> 
-          }
-        </main>
+        { // POPUP
+          isPopupVisible &&
+          <Popup
+            onPopupCancel={this.togglePopup}
+            onPopupSubmit={this.addCell}
+            renderAddSvg={this.renderAddSvg}
+            renderRemoveSvg={this.renderRemoveSvg}
+          /> 
+        }
       </div>
     );
   }
