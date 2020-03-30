@@ -18,7 +18,8 @@
       0 0.2em 0.2em 0.1em rgba($color: $color-cyan, $alpha: 0.2);
     height: $size-addButton;
     margin-left: $offset-cellAddButton - $size-addButton / 2;
-    padding: ($size-addButton - 15) / 2;
+    margin-top: 1rem;
+    padding: ($size-addButton - 12) / 2;
     width: $size-addButton;
   }
 
@@ -28,7 +29,8 @@
       0 0.2em 0.2em 0.1em rgba($color: $color-purple, $alpha: 0.2);
     height: $size-removeButton;
     margin-left: 20px;
-    padding: ($size-removeButton - 15) / 2;
+    min-width: $size-removeButton;
+    padding: ($size-removeButton - 12) / 2;
     width: $size-removeButton;
   }
 
@@ -51,6 +53,12 @@
         0 0.3em 0.25em 0.2em rgba($color: $color-cyan, $alpha: 0.3);
       transform: translateY(-0.05em);
     }
+  }
+
+  &--absolute {
+    position: absolute;
+    right: $padding-cell-main + $padding-cell-child;
+    top: 30px;
   }
 
   &__svg {

@@ -65,9 +65,15 @@ class App extends Component {
   renderButton = (type, parentId, id, callback) => {
 
     const isMain = parentId === 'main';
+    const isNested = () => {
+      return type === 'remove' && isMain
+      ? this.state.cells.find(cell => cell.id === id).value.length > 1
+      : false;
+    }
 
     const buttonClass = classNames('Button', `Button--${type}`, {
-      'Button--main': isMain && type === 'add'
+      'Button--main': isMain && type === 'add',
+      'Button--absolute': isMain && isNested() && type === 'remove'
     });
 
     const onButtonClick = callback

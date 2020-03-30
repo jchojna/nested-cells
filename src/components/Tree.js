@@ -14,11 +14,11 @@ const Tree = (props) => {
 
   const treeClass = classNames('Tree', {
     'Tree--main': parentId === 'main',
-    'Tree--cell': parentId !== 'main'
+    'Tree--child': parentId !== 'main'
   });
   const headingClass = classNames('Tree__heading', {
     'Tree__heading--main': parentId === 'main',
-    'Tree__heading--cell': parentId !== 'main'
+    'Tree__heading--child': parentId !== 'main'
   });
   
   return (
