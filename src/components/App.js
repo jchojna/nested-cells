@@ -66,8 +66,8 @@ class App extends Component {
 
     const isMain = parentId === 'main';
 
-    const buttonClass = classNames('button', `button--${type}`, {
-      'button--main': isMain
+    const buttonClass = classNames('Button', `Button--${type}`, {
+      'Button--main': isMain && type === 'add'
     });
 
     const onButtonClick = callback
@@ -84,7 +84,7 @@ class App extends Component {
       onButtonClick={onButtonClick}
     >
       <svg
-        className="button__svg"
+        className="Button__svg"
         viewBox="0 0 40 40"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -123,7 +123,6 @@ class App extends Component {
           parentName={category}
           parentId={id}
           childNodes={value}
-          onAddButtonClick={() => {console.log('add')}}
           renderCell={this.renderCell}
           renderButton={this.renderButton}
         />

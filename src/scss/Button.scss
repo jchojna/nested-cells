@@ -2,4 +2,56 @@
 @import './variables';
 
 .Button {
+  @include flex-center;
+  box-sizing: content-box;
+  background-origin: border-box;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  fill: #fff;
+  height: 12px;
+  outline: none;
+  padding: 8px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  width: 12px;
+  z-index: 1;
+
+  &--add {
+    @include gradient ($color-cyan, $color-green, 0);
+    box-shadow:
+      0 0.2em 0.2em 0.1em rgba($color: $color-cyan, $alpha: 0.2);
+    padding: 15px;
+  }
+
+  &--remove {
+    @include gradient ($color-lightPurple, $color-purple, 0);
+    box-shadow:
+      0 0.2em 0.2em 0.1em rgba($color: $color-purple, $alpha: 0.2);
+    margin-left: 20px;
+  }
+
+  &--main {
+    box-sizing: border-box;
+    box-shadow:
+      0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+      0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+      0 0.2em 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.4);
+    font-size: 3rem;
+    height: $width-mainAddButton;
+    margin-top: 3rem;
+    margin-left: $width-rootCell / 2 - $width-mainAddButton / 2;
+    width: $width-mainAddButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+        0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+        0 0.3em 0.25em 0.2em rgba($color: $color-cyan, $alpha: 0.3);
+      transform: translateY(-0.05em);
+    }
+  }
+
+  &__svg {
+    width: 100%;
+  }
 }
