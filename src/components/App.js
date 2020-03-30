@@ -4,7 +4,6 @@ import Tree from './Tree.js';
 import Cell from './Cell.js';
 import Button from './Button.js';
 import Popup from './Popup.js';
-import { v4 as uuidv4 } from 'uuid';
 import '../scss/App.scss';
 
 class App extends Component {
@@ -15,15 +14,13 @@ class App extends Component {
       isAddNewValuePopup: false,
       cells: [],
       editedCellId: null
-
-
     }
   }
 
   togglePopup = (type, parentId) => {
     this.setState(prevState => ({
       [`isAddNew${type}Popup`]: !prevState[`isAddNew${type}Popup`],
-      editedCellId: parentId
+      editedCellId: parentId ? parentId : null
     }));
   }
 
@@ -34,7 +31,6 @@ class App extends Component {
         newCell
       ]
     }));
-
     this.togglePopup('Cell');
   }
 
@@ -51,6 +47,12 @@ class App extends Component {
     }));
   }
 
+  removeValue = (parentId, id) => {
+    const cell = this.state.cells.find(cell => cell.id === parentId);
+    cell.value = cell.value.filter(val => val.id !== id);
+    this.setState(prevState => ({ cells: [...prevState.cells] }));
+  }
+
   setEditedCellId = (id) => {
     this.setState({editedCellId: id});
   }
@@ -64,12 +66,13 @@ class App extends Component {
     });
 
     const onButtonClick = callback
-    ? callback : isMain
-      ? () => this.togglePopup('Cell')
-      : type === 'add'
-        ? () => this.togglePopup('Value', parentId)
-        : () => this.removeCell(id)
-    
+    ? callback : type === 'add'
+      ? isMain
+        ? () => this.togglePopup('Cell')
+        : () => this.togglePopup('Value', parentId)
+      : isMain
+        ? () => this.removeCell(id)
+        : () => this.removeValue(parentId, id);
 
     return <Button
       buttonClass={buttonClass}
@@ -105,6 +108,7 @@ class App extends Component {
     return <Cell
       key={id}
       id={id}
+      parentId={parentId}
       renderButton={this.renderButton}
     >
       {
