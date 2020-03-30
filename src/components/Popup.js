@@ -53,27 +53,27 @@ class Popup extends Component {
   handlePopupSubmit = (e) => {
     e.preventDefault();
     const { category, value, singleValue } = this.state;
-    const { type, onPopupSubmit, editedCellId } = this.props;
+    const { onPopupSubmit, editedCellId } = this.props;
 
-    if (type === 'newCell') {
+    if (editedCellId) {
+      onPopupSubmit({
+        id: uuidv4(),
+        value: singleValue
+      }, editedCellId);
+
+    } else {
       onPopupSubmit({
         id: uuidv4(),
         category,
         value
       });
-
-    } else {
-      onPopupSubmit({
-        id: uuidv4(),
-        value: singleValue
-      }, editedCellId);
     }
   }
 
   render() {
     const { category, value, singleValue } = this.state;
-    const { type, onPopupCancel, renderButton } = this.props;
-    const heading = type === 'newCell' ? 'Add Cell' : 'Add Value';
+    const { onPopupCancel, renderButton, editedCellId } = this.props;
+    const heading = editedCellId ? 'Add Value' : 'Add Cell';
 
     return (
       <div className="Popup">
@@ -84,7 +84,7 @@ class Popup extends Component {
           <h2 className="Popup__heading">{heading}</h2>
   
           {
-            type === 'newCell' ?
+            !editedCellId ?
 
             <>
               {/* CATEGORY */}

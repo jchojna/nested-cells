@@ -167,8 +167,6 @@ class App extends Component {
         { // CELL POPUP
           isAddNewCellPopup &&
           <Popup
-            type="newCell"
-            editedCellId={null}
             onPopupCancel={() => this.togglePopup('Cell')}
             onPopupSubmit={this.addCell}
             renderButton={this.renderButton}
@@ -178,7 +176,6 @@ class App extends Component {
         { // VALUE POPUP
           isAddNewValuePopup &&
           <Popup
-            type="newValue"
             editedCellId={editedCellId}
             onPopupCancel={() => this.togglePopup('Value')}
             onPopupSubmit={this.addValue}
