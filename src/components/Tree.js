@@ -7,29 +7,22 @@ const Tree = (props) => {
     parentName,
     parentId,
     childNodes,
-    renderAddSvg,
-    onAddButtonClick,
-    renderCell
+    renderCell,
+    renderButton
   } = props;
   
   return (
 
     <main className="Tree">
       <h2 className="Tree__heading">{parentName}</h2>
-      { // LIST OF CELLS
+      {
         childNodes.map(({ id }) => {
           return (
             renderCell(id, parentId)
           );
         })
       }
-      {/* ADD CELL BUTTON */}
-        <button
-          className="button button--add button--main"
-          onClick={onAddButtonClick}
-        >
-          { renderAddSvg() }
-        </button>
+      { renderButton('add', true) }
     </main>
   );
 }

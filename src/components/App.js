@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Tree from './Tree.js';
 import Cell from './Cell.js';
+import Button from './Button.js';
 import Popup from './Popup.js';
 import { v4 as uuidv4 } from 'uuid';
 import '../scss/App.scss';
@@ -39,27 +40,41 @@ class App extends Component {
     }));
   }
 
-  renderAddSvg = () => {    
-    return <svg
-      className="button__svg"
-      viewBox="0 0 40 40"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline points="0,15 0,25 15,25 15,40 25,40 25,25 40,25 40,15 25,15 25,0 15,0 15,15" />
-    </svg>
-  }
+  renderButton = (type, isMain, id, callback) => {
 
-  renderRemoveSvg = () => {
-    return <svg
-      className="button__svg"
-      viewBox="0 0 40 40"
-      xmlns="http://www.w3.org/2000/svg"
+    const buttonClass = classNames('button', `button--${type}`, {
+      'button--main': isMain
+    });
+
+    const onButtonClick = callback
+    ? callback : isMain
+      ? this.togglePopup
+      : type === 'add'
+        ? this.addCell
+        : () => this.removeCell(id)
+    
+
+    return <Button
+      buttonClass={buttonClass}
+      onButtonClick={onButtonClick}
     >
-      <rect x="0" y="12.5" width="40" height="15" />
-    </svg>
+      <svg
+        className="button__svg"
+        viewBox="0 0 40 40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {
+          type === 'add'
+          ? <polyline points="0,15 0,25 15,25 15,40 25,40 25,25 40,25 40,15 25,15 25,0 15,0 15,15" />
+          : <rect x="0" y="12.5" width="40" height="15" />
+        }
+      </svg>
+
+    </Button>
   }
 
   renderCell = (id, parentId) => {
+
     const { cells } = this.state;
     const isMain = parentId === 'main';
     const isNested = isMain && cells.find(cell => cell.id === id).value.length > 1;
@@ -73,11 +88,11 @@ class App extends Component {
     return <Cell
       key={id}
       id={id}
-      onCellRemove={this.removeCell}
-      renderRemoveSvg={this.renderRemoveSvg}
+      renderButton={this.renderButton}
     >
       {
         isNested ?
+
         <Tree
           parentName={category}
           parentId={id}
@@ -85,12 +100,17 @@ class App extends Component {
           renderAddSvg={this.renderAddSvg}
           onAddButtonClick={() => {console.log('add')}}
           renderCell={this.renderCell}
+          renderButton={this.renderButton}
         />
-        : isMain ?        
+
+        : isMain ?     
+
           <h3 className="Cell__heading">
             {`${category} ${value}`}
           </h3>
+
           :
+
           <h3 className="Cell__heading">
             {value}
           </h3>
@@ -111,9 +131,8 @@ class App extends Component {
           parentName="People"
           parentId="main"
           childNodes={cells}
-          renderAddSvg={this.renderAddSvg}
-          onAddButtonClick={this.togglePopup}
           renderCell={this.renderCell}
+          renderButton={this.renderButton}
         />
 
         { // POPUP
@@ -121,8 +140,7 @@ class App extends Component {
           <Popup
             onPopupCancel={this.togglePopup}
             onPopupSubmit={this.addCell}
-            renderAddSvg={this.renderAddSvg}
-            renderRemoveSvg={this.renderRemoveSvg}
+            renderButton={this.renderButton}
           /> 
         }
       </div>

@@ -57,11 +57,7 @@ class Popup extends Component {
 
   render() {
     const { category, value } = this.state;
-    const {
-      onPopupCancel,
-      renderAddSvg,
-      renderRemoveSvg
-    } = this.props;
+    const { onPopupCancel, renderButton } = this.props;
 
     return (
       <div className="Popup">
@@ -103,22 +99,8 @@ class Popup extends Component {
             })
           }
 
-
-
-
-
-
-
-
-  
-          { // ADD BUTTON
-            <button
-              className="button button--add"
-              type="button"
-              onClick={this.addNewValueInput}
-            >
-              { renderAddSvg() }
-            </button>
+          {
+            renderButton('add', false, null, this.addNewValueInput)
           }
   
           { // REMOVE BUTTON
