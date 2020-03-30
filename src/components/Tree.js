@@ -16,7 +16,6 @@ const Tree = (props) => {
 
     <main className="Tree">
       <h2 className="Tree__heading">{parentName}</h2>
-
       { // LIST OF CELLS
         childNodes.map(({ id }) => {
           return (
@@ -24,7 +23,6 @@ const Tree = (props) => {
           );
         })
       }
-
       {/* ADD CELL BUTTON */}
         <button
           className="button button--add button--main"

@@ -7,7 +7,7 @@ class Popup extends Component {
     super(props);
     this.state = {
       category: '',
-      values: [
+      value: [
         {
           id: uuidv4(),
           value: ''
@@ -24,17 +24,17 @@ class Popup extends Component {
 
   handleValueInputChange = (value, id) => {
     this.setState(prevState => {
-      prevState.values.find(value => value.id === id).value = value;
+      prevState.value.find(val => val.id === id).value = value;
       return {
-        values: [...prevState.values]
+        value: [...prevState.value]
       }
     });
   }
 
   addNewValueInput = () => {
     this.setState(prevState => ({
-      values: [
-        ...prevState.values,
+      value: [
+        ...prevState.value,
         {
           id: uuidv4(),
           value: ''
@@ -45,18 +45,18 @@ class Popup extends Component {
 
   handlePopupSubmit = (e) => {
     e.preventDefault();
-    const { category, values } = this.state;
+    const { category, value } = this.state;
     const { onPopupSubmit } = this.props;
 
     onPopupSubmit({
       id: uuidv4(),
       category,
-      values
+      value
     });
   }
 
   render() {
-    const { category, values } = this.state;
+    const { category, value } = this.state;
     const {
       onPopupCancel,
       renderAddSvg,
@@ -86,7 +86,7 @@ class Popup extends Component {
             Value:
           </label>
           {
-            values.map((value, index) => {
+            value.map((value, index) => {
               return (
                 <input
                   key={value.id}

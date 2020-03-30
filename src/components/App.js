@@ -59,91 +59,44 @@ class App extends Component {
     </svg>
   }
 
-
-
-
-
-
-
-
-
   renderCell = (id, parentId) => {
     const { cells } = this.state;
-
     const isMain = parentId === 'main';
-    const isNested = isMain && cells.find(cell => cell.id === id).values.length > 1;
-
-
-    if (isNested) {
-      
-      const { category, values } = cells.find(cell => cell.id === id);
-
-      return <Cell
-        key={id}
-        id={id}
-        onCellRemove={this.removeCell}
-        renderRemoveSvg={this.renderRemoveSvg}
-      >
+    const isNested = isMain && cells.find(cell => cell.id === id).value.length > 1;
+    const cell = cells
+    .find(cell => !isNested && !isMain ? cell.id === parentId : cell.id === id);
+    const { category } = cell;
+    const { value } = isNested
+    ? cell
+    : isMain ? cell.value[0] : cell.value.find(value => value.id === id);
+    
+    return <Cell
+      key={id}
+      id={id}
+      onCellRemove={this.removeCell}
+      renderRemoveSvg={this.renderRemoveSvg}
+    >
+      {
+        isNested ?
         <Tree
           parentName={category}
           parentId={id}
-          childNodes={values}
+          childNodes={value}
           renderAddSvg={this.renderAddSvg}
           onAddButtonClick={() => {console.log('add')}}
           renderCell={this.renderCell}
         />
-      </Cell>
-
-    } else {
-
-      if (isMain) {
-
-        const cell = cells.find(cell => cell.id === id);
-        const { category } = cell;
-        const value = cell.values[0].value;
-
-        return <Cell
-          key={id}
-          id={id}
-          onCellRemove={this.removeCell}
-          renderRemoveSvg={this.renderRemoveSvg}
-        >
+        : isMain ?        
           <h3 className="Cell__heading">
             {`${category} ${value}`}
           </h3>
-        </Cell>
-
-      } else {
-
-        const value = cells
-        .find(cell => cell.id === parentId)
-        .values
-        .find(value => value.id === id)
-        .value;
-
-        return <Cell
-          key={id}
-          id={id}
-          onCellRemove={this.removeCell}
-          renderRemoveSvg={this.renderRemoveSvg}
-        >
+          :
           <h3 className="Cell__heading">
             {value}
           </h3>
-        </Cell>
-
-      }
-    }      
+      }    
+    </Cell>
   }
-
-
-
-
-
-
-
-
-
 
   render() {
     const { isPopupVisible, cells } = this.state;

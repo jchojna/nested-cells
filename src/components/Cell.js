@@ -10,9 +10,8 @@ const Cell = (props) => {
     
   return (
     <section className="Cell">
-
       {props.children}
-    
+      
       <button
         className="button button--remove"
         onClick={() => onCellRemove(id)}
