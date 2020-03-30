@@ -5,7 +5,7 @@ const Cell = ({id, renderButton, children}) => {
   return (
     <section className="Cell">
       { children }      
-      { renderButton('remove', false, id) }
+      { renderButton('remove', null, id) }
     </section>
   );
 }

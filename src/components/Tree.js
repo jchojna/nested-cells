@@ -22,7 +22,7 @@ const Tree = (props) => {
           );
         })
       }
-      { renderButton('add', true) }
+      { renderButton('add', parentId) }
     </main>
   );
 }

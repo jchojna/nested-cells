@@ -11,15 +11,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPopupVisible: false,
-      cells: []
+      isAddNewCellPopup: false,
+      isAddNewValuePopup: false,
+      cells: [],
+      editedCellId: null
+
 
     }
   }
 
-  togglePopup = () => {
+  togglePopup = (type, parentId) => {
     this.setState(prevState => ({
-      isPopupVisible: !prevState.isPopupVisible
+      [`isAddNew${type}Popup`]: !prevState[`isAddNew${type}Popup`],
+      editedCellId: parentId
     }));
   }
 
@@ -31,7 +35,14 @@ class App extends Component {
       ]
     }));
 
-    this.togglePopup();
+    this.togglePopup('Cell');
+  }
+
+  addValue = (newValue, cellId) => {
+    const cell = this.state.cells.find(cell => cell.id === cellId);
+    cell.value = [ ...cell.value, newValue ]
+    this.setState(prevState => ({ cells: [...prevState.cells] }));
+    this.togglePopup('Value');
   }
 
   removeCell = (id) => {
@@ -40,7 +51,13 @@ class App extends Component {
     }));
   }
 
-  renderButton = (type, isMain, id, callback) => {
+  setEditedCellId = (id) => {
+    this.setState({editedCellId: id});
+  }
+
+  renderButton = (type, parentId, id, callback) => {
+
+    const isMain = parentId === 'main';
 
     const buttonClass = classNames('button', `button--${type}`, {
       'button--main': isMain
@@ -48,9 +65,9 @@ class App extends Component {
 
     const onButtonClick = callback
     ? callback : isMain
-      ? this.togglePopup
+      ? () => this.togglePopup('Cell')
       : type === 'add'
-        ? this.addCell
+        ? () => this.togglePopup('Value', parentId)
         : () => this.removeCell(id)
     
 
@@ -97,7 +114,6 @@ class App extends Component {
           parentName={category}
           parentId={id}
           childNodes={value}
-          renderAddSvg={this.renderAddSvg}
           onAddButtonClick={() => {console.log('add')}}
           renderCell={this.renderCell}
           renderButton={this.renderButton}
@@ -119,7 +135,12 @@ class App extends Component {
   }
 
   render() {
-    const { isPopupVisible, cells } = this.state;
+    const {
+      isAddNewCellPopup,
+      isAddNewValuePopup,
+      cells,
+      editedCellId
+    } = this.state;
 
     return (
       <div className="App">
@@ -135,11 +156,24 @@ class App extends Component {
           renderButton={this.renderButton}
         />
 
-        { // POPUP
-          isPopupVisible &&
+        { // CELL POPUP
+          isAddNewCellPopup &&
           <Popup
-            onPopupCancel={this.togglePopup}
+            type="newCell"
+            editedCellId={null}
+            onPopupCancel={() => this.togglePopup('Cell')}
             onPopupSubmit={this.addCell}
+            renderButton={this.renderButton}
+          /> 
+        }
+
+        { // VALUE POPUP
+          isAddNewValuePopup &&
+          <Popup
+            type="newValue"
+            editedCellId={editedCellId}
+            onPopupCancel={() => this.togglePopup('Value')}
+            onPopupSubmit={this.addValue}
             renderButton={this.renderButton}
           /> 
         }
