@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { initialCells } from '../lib/initialCells';
 import Tree from './Tree.js';
 import Cell from './Cell.js';
 import Button from './Button.js';
@@ -10,11 +11,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cells: [],
       isAddNewCellPopup: false,
       isAddNewValuePopup: false,
-      cells: [],
       editedCellId: null
     }
+  }
+
+  componentDidMount = () => {
+    this.setState({ cells: initialCells });
   }
 
   togglePopup = (type, parentId) => {
@@ -185,5 +190,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
