@@ -3,44 +3,46 @@
 
 .Button {
   @include flex-center;
-  box-sizing: content-box;
   background-origin: border-box;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   fill: #fff;
-  height: 12px;
   outline: none;
-  padding: 8px;
   transition: box-shadow 0.2s, transform 0.2s;
-  width: 12px;
   z-index: 1;
 
   &--add {
     @include gradient ($color-cyan, $color-green, 0);
     box-shadow:
       0 0.2em 0.2em 0.1em rgba($color: $color-cyan, $alpha: 0.2);
-    padding: 15px;
+    height: $size-addButton;
+    margin-left: $offset-cellAddButton - $size-addButton / 2;
+    padding: ($size-addButton - 15) / 2;
+    width: $size-addButton;
   }
 
   &--remove {
     @include gradient ($color-lightPurple, $color-purple, 0);
     box-shadow:
       0 0.2em 0.2em 0.1em rgba($color: $color-purple, $alpha: 0.2);
+    height: $size-removeButton;
     margin-left: 20px;
+    padding: ($size-removeButton - 15) / 2;
+    width: $size-removeButton;
   }
 
   &--main {
-    box-sizing: border-box;
     box-shadow:
       0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
       0 0 0 0.2em rgba($color: #fff, $alpha: 1),
       0 0.2em 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.4);
     font-size: 3rem;
-    height: $width-mainAddButton;
+    height: $size-mainAddButton;
     margin-top: 3rem;
-    margin-left: $width-rootCell / 2 - $width-mainAddButton / 2;
-    width: $width-mainAddButton;
+    margin-left: $width-rootCellHeading / 2 - $size-mainAddButton / 2;
+    padding: 15px;
+    width: $size-mainAddButton;
 
     &:hover {
       box-shadow:

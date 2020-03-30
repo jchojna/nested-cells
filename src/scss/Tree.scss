@@ -5,33 +5,65 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   border-radius: $corner-radius;
-  padding: $padding-container;
   position: relative;
 
   &::before {
     background-color: $color-light;
-    bottom: $padding-container;
     content: '';
-    left: $width-rootCell / 2 + $padding-container;
     position: absolute;
-    top: $padding-container;
     width: 1px;
+  }
+
+  &--main {
+    background-color: #fff;
+    padding: $padding-container;
+
+    &::before {
+      bottom: $padding-container;
+      left: $width-rootCellHeading / 2 + $padding-container;
+      top: $padding-container;
+    }
+  }
+
+  &--cell {
+
+    &::before {
+      bottom: 0;
+      left: $offset-cellAddButton;
+      top: 0;
+    }
   }
 
   &__heading {
     @include flex-center;
-    @include gradient ($color-violet, $color-lilac, 0);
-    border-radius: $corner-radius;
-    box-shadow: $shadow-cell;
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
-    margin-bottom: 2.5rem;
-    padding: 0.9em;
-    width: $width-rootCell;
     z-index: 1;
+
+    &--main {
+      @include gradient ($color-violet, $color-lilac, 0);
+      border-radius: $corner-radius;
+      box-shadow: $shadow-cell;
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      padding: 0.9em;
+      width: $width-rootCellHeading;
+
+    }
+
+    &--cell {
+      background-color: #fff;
+      border: 1px solid $color-light;
+      border-radius: $corner-radius-small;
+      color: $color-dark;
+      font-size: 1.1rem;
+      justify-content: flex-start;
+      margin-bottom: 0.8rem;
+      padding: 0.6em;
+      width: 100%;
+
+    }
   }
 }
