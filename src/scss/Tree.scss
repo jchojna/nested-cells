@@ -10,6 +10,10 @@
   position: relative;
   width: 100%;
 
+  &--empty {
+    width: auto;
+  }
+
   &::before {
     background-color: $color-light;
     content: '';

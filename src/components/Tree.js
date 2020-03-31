@@ -14,7 +14,8 @@ const Tree = (props) => {
 
   const treeClass = classNames('Tree', {
     'Tree--main': parentId === 'main',
-    'Tree--child': parentId !== 'main'
+    'Tree--child': parentId !== 'main',
+    'Tree--empty': childNodes.length === 0
   });
   const headingClass = classNames('Tree__heading', {
     'Tree__heading--main': parentId === 'main',
