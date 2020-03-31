@@ -1,0 +1,19 @@
+@keyframes popupFadeIn {
+  0% {
+    background-color: rgba($color: #000, $alpha: 0);
+
+  }
+  100% {
+    background-color: rgba($color: #000, $alpha: 0.4);
+  }
+}
+
+@keyframes formFadeIn {
+  0% {
+    transform: scale(0);
+
+  }
+  100% {
+    transform: scale(1);
+  }
+}

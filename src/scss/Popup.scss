@@ -1,9 +1,10 @@
-@import './mixins';
 @import './variables';
+@import './mixins';
+@import './animations';
 
 .Popup {
   @include flex-center;
-  background-color: rgba($color: #000, $alpha: 0.5);
+  animation: popupFadeIn 0.3s forwards;
   height: 100%;
   left: 0;
   position: fixed;
@@ -12,8 +13,10 @@
   z-index: 1;
 
   &__form {
+    animation: formFadeIn 0.3s forwards cubic-bezier(.04,.88,.62,1.17);
     background-color: #fff;
     border-radius: $corner-radius;
+    box-shadow: 0 0 20px rgba($color: #000, $alpha: 0.3);
     display: grid;
     gap: 0.5rem;
     padding: 3rem;
