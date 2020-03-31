@@ -19,24 +19,37 @@ class Popup extends Component {
     }
   }
 
+  validateForm = (id) => {
+    return this.state.category.length > 0
+    && !this.state.value.find(val => val.value.length === 0 && val.id !== id);
+  }
+
   handleCategoryInputChange = (value) => {
+    const isFormValid = value.length > 0
+    && !this.state.value.find(val => val.value.length === 0 );
+
     this.setState({
-      category: value
+      category: value,
+      isFormValid
     });
   }
 
   handleValueInputChange = (value, id) => {
+    const isFormValid = this.validateForm(id) && value.length > 0;
+
     this.setState(prevState => {
       prevState.value.find(val => val.id === id).value = value;
       return {
-        value: [...prevState.value]
+        value: [...prevState.value],
+        isFormValid
       }
     });
   }
 
   handleSingleValueInputChange = (value) => {
     this.setState({
-      singleValue: value
+      singleValue: value,
+      isFormValid: value.length > 0
     });
   }
 
@@ -48,13 +61,17 @@ class Popup extends Component {
           id: uuidv4(),
           value: ''
         }
-      ]
+      ],
+      isFormValid: false
     }));
   }
 
   removeValue = (id) => {
+    const isFormValid = this.validateForm(id);
+
     this.setState(prevState => ({
-      value: prevState.value.filter(val => val.id !== id)
+      value: prevState.value.filter(val => val.id !== id),
+      isFormValid
     }));
   }
 
@@ -79,9 +96,14 @@ class Popup extends Component {
   }
 
   render() {
-    const { category, value, singleValue } = this.state;
+    const { category, value, singleValue, isFormValid } = this.state;
     const { onPopupCancel, renderButton, editedCellId } = this.props;
     const heading = editedCellId ? 'Add Value' : 'Add Cell';
+
+    const addButtonFlag = isFormValid ? 'popup' : 'disabled';
+    const submitButtonClass = classNames('Popup__button Popup__button--submit', {
+      'Popup__button--disabled': !isFormValid
+    })
 
     return (
       <div className="Popup">
@@ -106,7 +128,6 @@ class Popup extends Component {
                 className="Popup__input"
                 value={category}
                 onChange={(e) => this.handleCategoryInputChange(e.target.value)}
-                required
                 autoFocus
               />
       
@@ -124,14 +145,13 @@ class Popup extends Component {
                         type="text"
                         className="Popup__input"
                         value={value.content}
-                        required
                         onChange={(e) =>
                           this.handleValueInputChange(e.target.value, value.id)
                         }
                       />
                       {
                         index === 0
-                        ? renderButton('add', 'popup', null, this.addNewValueInput)
+                        ? renderButton('add', addButtonFlag, null, this.addNewValueInput)
                         : renderButton('remove', 'popup', null, () =>
                             this.removeValue(value.id)
                           )
@@ -155,20 +175,16 @@ class Popup extends Component {
                 className="Popup__input"
                 value={singleValue}
                 onChange={(e) => this.handleSingleValueInputChange(e.target.value)}
-                required
                 autoFocus
               />
             </>
           }
   
-          { // REMOVE BUTTON
-            /* renderRemoveButton(id) */
-          }
-  
           {/* BUTTONS */}
           <button
             type="submit"
-            className="Popup__button Popup__button--submit"
+            disabled={!isFormValid}
+            className={submitButtonClass}
           >
             Submit
           </button>

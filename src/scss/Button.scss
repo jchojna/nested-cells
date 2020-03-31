@@ -77,9 +77,15 @@
     top: $padding-cell-main + $padding-cell-child;
   }
 
-  &--popup {
+  &--popup,
+  &--disabled {
     justify-self: center;
     margin: 0;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   &__svg {

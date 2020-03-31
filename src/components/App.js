@@ -75,11 +75,13 @@ class App extends Component {
       ? this.state.cells.find(cell => cell.id === id).value.length > 1
       : false;
     }
+    const isDisabled = parentId === 'disabled';
 
     const buttonClass = classNames('Button', `Button--${type}`, {
       'Button--main': isMain && type === 'add',
       'Button--absolute': isMain && isNested() && type === 'remove',
-      'Button--popup': parentId === 'popup'
+      'Button--popup': parentId === 'popup',
+      'Button--disabled': parentId === 'disabled'
     });
 
     const onButtonClick = callback
@@ -94,6 +96,7 @@ class App extends Component {
     return <Button
       buttonClass={buttonClass}
       onButtonClick={onButtonClick}
+      isDisabled={isDisabled}
     >
       <svg
         className="Button__svg"
