@@ -186,7 +186,7 @@ class Popup extends Component {
             disabled={!isFormValid}
             className={submitButtonClass}
           >
-            Submit
+            Add
           </button>
           <button
             type="button"

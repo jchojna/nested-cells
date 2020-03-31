@@ -73,4 +73,27 @@
       word-break: break-all;
     }
   }
+
+  @media only screen and (max-width: 720px) {
+    
+    & {
+      align-items: center;
+
+      &--main {
+        padding: 30px;
+      }
+
+      &::before {
+        left: initial;
+      }
+
+      &__heading {
+        width: 100%;
+
+        &--child {
+          align-self: start;
+        }
+      }
+    }
+  }
 }
