@@ -88,7 +88,8 @@ class Popup extends Component {
 
             <>
               {/* CATEGORY */}
-              <label htmlFor="popupCategory" className="Popup__label">
+              <label
+                htmlFor="popupCategory" className="Popup__label">
                 Category:
               </label>
               <input

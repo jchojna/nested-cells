@@ -14,9 +14,14 @@ $size-mainAddButton: 50px;
 $size-addButton: 40px;
 $size-removeButton: 25px;
 
+// SHADOWS
+$shadow-cell: 0 2px 10px 5px $color-lightLilac;
+$shadow-button: 0 2px 5px 3px $color-lightLilac;
+$shadow-hoverSubmit: 0 2px 10px 5px rgba($color: $color-cyan, $alpha: 0.4);
+$shadow-hoverCancel: 0 2px 10px 5px rgba($color: $color-purple, $alpha: 0.4);
+
 $corner-radius: 5px;
 $corner-radius-small: 3px;
-$shadow-cell: 0 2px 10px 5px $color-lightLilac;
 $padding-container: 60px;
 
 $width-rootCellHeading: 240px;
