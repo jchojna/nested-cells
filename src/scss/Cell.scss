@@ -20,8 +20,8 @@
 
   &::after {
     color: $color-light;
-    font-size: 1.1em;
-    font-weight: 400;
+    font-size: 1.2em;
+    font-family: 'Brandon Grotesque Regular';
     line-height: 1;
     position: absolute;
     transform: translateY(-50%);
@@ -74,8 +74,7 @@
   }
 
   &__heading {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.2rem;
     margin: 0;
   }
 }

@@ -3,7 +3,10 @@
 
 .App {
   @include flex-center;
-  background-color: $color-light;
+  background: #fff;
+  background: url(../assets/svg/background.svg);
+  background-size: 100%;
+  background-position: 0 20%;
   flex-direction: column;
   margin: 0;
   min-height: 100vh;

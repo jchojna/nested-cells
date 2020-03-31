@@ -9,7 +9,7 @@
   cursor: pointer;
   fill: #fff;
   outline: none;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow $time-hover;
   z-index: 1;
 
   &--add {
@@ -21,17 +21,31 @@
     margin-top: 1rem;
     padding: ($size-addButton - 12) / 2;
     width: $size-addButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+        0 0 0 0.3em rgba($color: #fff, $alpha: 1),
+        0 0 1em 0.2em rgba($color: $color-cyan, $alpha: 0.8);
+    }
   }
 
   &--remove {
     @include gradient ($color-lightPurple, $color-purple, 0);
     box-shadow:
-      0 0.2em 0.2em 0.1em rgba($color: $color-purple, $alpha: 0.2);
+      0 0.2em 0.4em 0.1em rgba($color: $color-purple, $alpha: 0.4);
     height: $size-removeButton;
     margin-left: 20px;
     min-width: $size-removeButton;
     padding: ($size-removeButton - 12) / 2;
     width: $size-removeButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-purple, $alpha: 0.3),
+        0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+        0 0 0.8em 0.2em rgba($color: $color-purple, $alpha: 0.8);
+    }
   }
 
   &--main {
@@ -49,16 +63,15 @@
     &:hover {
       box-shadow:
         0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
-        0 0 0 0.2em rgba($color: #fff, $alpha: 1),
-        0 0.3em 0.25em 0.2em rgba($color: $color-cyan, $alpha: 0.3);
-      transform: translateY(-0.05em);
+        0 0 0 0.1em rgba($color: #fff, $alpha: 1),
+        0 0 0.6em 0.1em rgba($color: $color-cyan, $alpha: 0.8);
     }
   }
 
   &--absolute {
     position: absolute;
     right: $padding-cell-main + $padding-cell-child;
-    top: 30px;
+    top: $padding-cell-main + $padding-cell-child;
   }
 
   &__svg {

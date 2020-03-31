@@ -19,6 +19,7 @@
 
   &--main {
     background-color: #fff;
+    box-shadow: 0 2px 30px 5px $color-lightLilac;
     padding: $padding-container;
 
     &::before {
@@ -39,7 +40,6 @@
 
   &__heading {
     @include flex-center;
-    font-weight: 700;
     margin: 0;
     z-index: 1;
 
@@ -48,9 +48,10 @@
       border-radius: $corner-radius;
       box-shadow: $shadow-cell;
       color: #fff;
-      font-size: 1.3rem;
+      font-family: 'Brandon Grotesque Bold';
+      font-size: 1.4rem;
       margin-bottom: 2.5rem;
-      padding: 0.9em;
+      padding: 0.8em;
       width: $width-rootCellHeading;
     }
 
@@ -59,7 +60,7 @@
       border: 1px solid $color-light;
       border-radius: $corner-radius-small;
       color: $color-dark;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       justify-content: flex-start;
       margin-bottom: 1.2rem;
       min-height: $padding-cell-child * 2 + $size-removeButton;
