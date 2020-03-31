@@ -79,8 +79,11 @@
 
   &--popup,
   &--disabled {
+    height: $size-popupButton;
     justify-self: center;
     margin: 0;
+    padding: 8px;
+    width: $size-popupButton;
   }
 
   &--disabled {

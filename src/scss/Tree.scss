@@ -88,7 +88,9 @@
       }
 
       &__heading {
-        width: 100%;
+        &--main {
+          width: 100%;
+        }
 
         &--child {
           align-self: start;

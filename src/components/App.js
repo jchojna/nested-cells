@@ -5,11 +5,6 @@ import Tree from './Tree.js';
 import Cell from './Cell.js';
 import Button from './Button.js';
 import Popup from './Popup.js';
-<<<<<<< HEAD
-=======
-import { initialCells } from '../lib/initialCells';
-import logo from '../assets/svg/hype_logo.svg';
->>>>>>> 63eff47... feat: add new font
 import '../scss/App.scss';
 
 class App extends Component {

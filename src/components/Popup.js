@@ -143,7 +143,7 @@ class Popup extends Component {
                         key={value.id}
                         id={index === 0 ? 'popupValue' : value.id}
                         type="text"
-                        className="Popup__input"
+                        className="Popup__input Popup__input--value"
                         value={value.content}
                         onChange={(e) =>
                           this.handleValueInputChange(e.target.value, value.id)
