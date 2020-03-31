@@ -60,6 +60,7 @@ class App extends Component {
   removeValue = (parentId, id) => {
     const cell = this.state.cells.find(cell => cell.id === parentId);
     cell.value = cell.value.filter(val => val.id !== id);
+
     this.setState(prevState => ({ cells: [...prevState.cells] }));
   }
 

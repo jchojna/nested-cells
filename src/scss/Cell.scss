@@ -3,6 +3,7 @@
 
 .Cell {
   align-items: center;
+  animation: cellFadeIn 0.3s $fade-bezier;
   color: $color-dark;
   display: flex;
   justify-content: space-between;
@@ -54,6 +55,7 @@
   }
 
   &--child {
+    background-color: #fff;
     border: 1px solid $color-light;
     border-radius: $corner-radius-small;
     margin: 0.2rem 0;
