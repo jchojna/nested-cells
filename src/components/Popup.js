@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 import '../scss/Popup.scss';
 
@@ -13,7 +14,8 @@ class Popup extends Component {
           value: ''
         },
       ],
-      singleValue: ''
+      singleValue: '',
+      isFormValid: false
     }
   }
 
@@ -47,6 +49,12 @@ class Popup extends Component {
           value: ''
         }
       ]
+    }));
+  }
+
+  removeValue = (id) => {
+    this.setState(prevState => ({
+      value: prevState.value.filter(val => val.id !== id)
     }));
   }
 
@@ -99,6 +107,7 @@ class Popup extends Component {
                 value={category}
                 onChange={(e) => this.handleCategoryInputChange(e.target.value)}
                 required
+                autoFocus
               />
       
               {/* VALUES */}
@@ -108,23 +117,28 @@ class Popup extends Component {
               {
                 value.map((value, index) => {
                   return (
-                    <input
-                      key={value.id}
-                      id={index === 0 ? 'popupValue' : value.id}
-                      type="text"
-                      className="Popup__input"
-                      value={value.content}
-                      required
-                      onChange={(e) =>
-                        this.handleValueInputChange(e.target.value, value.id)
+                    <React.Fragment key={value.id}>
+                      <input
+                        key={value.id}
+                        id={index === 0 ? 'popupValue' : value.id}
+                        type="text"
+                        className="Popup__input"
+                        value={value.content}
+                        required
+                        onChange={(e) =>
+                          this.handleValueInputChange(e.target.value, value.id)
+                        }
+                      />
+                      {
+                        index === 0
+                        ? renderButton('add', 'popup', null, this.addNewValueInput)
+                        : renderButton('remove', 'popup', null, () =>
+                            this.removeValue(value.id)
+                          )
                       }
-                    />
+                    </React.Fragment>
                   );
                 })
-              }
-
-              {
-                renderButton('add', false, null, this.addNewValueInput)
               }
             </>
 
@@ -142,6 +156,7 @@ class Popup extends Component {
                 value={singleValue}
                 onChange={(e) => this.handleSingleValueInputChange(e.target.value)}
                 required
+                autoFocus
               />
             </>
           }

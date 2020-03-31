@@ -78,7 +78,8 @@ class App extends Component {
 
     const buttonClass = classNames('Button', `Button--${type}`, {
       'Button--main': isMain && type === 'add',
-      'Button--absolute': isMain && isNested() && type === 'remove'
+      'Button--absolute': isMain && isNested() && type === 'remove',
+      'Button--popup': parentId === 'popup'
     });
 
     const onButtonClick = callback
