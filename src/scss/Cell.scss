@@ -3,6 +3,7 @@
 
 .Cell {
   align-items: center;
+  animation: cellFadeIn 0.3s $fade-bezier;
   color: $color-dark;
   display: flex;
   justify-content: space-between;
@@ -54,6 +55,7 @@
   }
 
   &--child {
+    background-color: #fff;
     border: 1px solid $color-light;
     border-radius: $corner-radius-small;
     margin: 0.2rem 0;
@@ -76,5 +78,38 @@
   &__heading {
     font-size: 1.2rem;
     margin: 0;
+  }
+
+  @media only screen and (max-width: 720px) {
+    
+    & {
+      background-color: #fff;
+      margin-left: 0;
+      min-width: 0;
+      z-index: 1;
+      width: 100%;
+
+      &::before,
+      &::after {
+        content: none;
+      }
+
+      &--main {
+        overflow: hidden;
+
+        &::before {
+          @include gradient ($color-violet, $color-lilac, 0);
+          background-repeat: no-repeat;
+          background-size: 10px;
+          content: '';
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          z-index: 0;
+        }
+      }
+    }
   }
 }

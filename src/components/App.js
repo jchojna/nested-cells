@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
-import { initialCells } from '../lib/initialCells';
-import Tree from './Tree.js';
-import Cell from './Cell.js';
-import Button from './Button.js';
-import Popup from './Popup.js';
-<<<<<<< HEAD
-=======
-import { initialCells } from '../lib/initialCells';
-import logo from '../assets/svg/hype_logo.svg';
->>>>>>> 63eff47... feat: add new font
-import '../scss/App.scss';
+import React, {Component} from "react";
+import classNames from "classnames";
+import {initialCells} from "../lib/initialCells";
+import Tree from "./Tree.js";
+import Cell from "./Cell.js";
+import Button from "./Button.js";
+import Popup from "./Popup.js";
+import "../scss/App.scss";
 
 class App extends Component {
   constructor(props) {
@@ -19,146 +14,141 @@ class App extends Component {
       cells: [],
       isAddNewCellPopup: false,
       isAddNewValuePopup: false,
-      editedCellId: null
-    }
+      editedCellId: null,
+    };
   }
 
   componentDidMount = () => {
-    this.setState({ cells: initialCells });
-  }
+    this.setState({cells: initialCells});
+  };
 
   togglePopup = (type, parentId) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       [`isAddNew${type}Popup`]: !prevState[`isAddNew${type}Popup`],
-      editedCellId: parentId ? parentId : null
+      editedCellId: parentId ? parentId : null,
     }));
-  }
+  };
 
   addCell = (newCell) => {
-    this.setState(prevState => ({
-      cells: [
-        ...prevState.cells,
-        newCell
-      ]
+    this.setState((prevState) => ({
+      cells: [...prevState.cells, newCell],
     }));
-    this.togglePopup('Cell');
-  }
+    this.togglePopup("Cell");
+  };
 
   addValue = (newValue, cellId) => {
-    const cell = this.state.cells.find(cell => cell.id === cellId);
-    cell.value = [ ...cell.value, newValue ]
-    this.setState(prevState => ({ cells: [...prevState.cells] }));
-    this.togglePopup('Value');
-  }
+    const cell = this.state.cells.find((cell) => cell.id === cellId);
+    cell.value = [...cell.value, newValue];
+    this.setState((prevState) => ({cells: [...prevState.cells]}));
+    this.togglePopup("Value");
+  };
 
   removeCell = (id) => {
-    this.setState(prevState => ({
-      cells: prevState.cells.filter(cell => cell.id !== id)
+    this.setState((prevState) => ({
+      cells: prevState.cells.filter((cell) => cell.id !== id),
     }));
-  }
+  };
 
   removeValue = (parentId, id) => {
-    const cell = this.state.cells.find(cell => cell.id === parentId);
-    cell.value = cell.value.filter(val => val.id !== id);
-    this.setState(prevState => ({ cells: [...prevState.cells] }));
-  }
+    const cell = this.state.cells.find((cell) => cell.id === parentId);
+    cell.value = cell.value.filter((val) => val.id !== id);
+
+    this.setState((prevState) => ({cells: [...prevState.cells]}));
+  };
 
   setEditedCellId = (id) => {
     this.setState({editedCellId: id});
-  }
+  };
 
   renderButton = (type, parentId, id, callback) => {
-
-    const isMain = parentId === 'main';
+    const isMain = parentId === "main";
     const isNested = () => {
-      return type === 'remove' && isMain
-      ? this.state.cells.find(cell => cell.id === id).value.length > 1
-      : false;
-    }
+      return type === "remove" && isMain
+        ? this.state.cells.find((cell) => cell.id === id).value.length > 1
+        : false;
+    };
+    const isDisabled = parentId === "disabled";
 
-    const buttonClass = classNames('Button', `Button--${type}`, {
-      'Button--main': isMain && type === 'add',
-      'Button--absolute': isMain && isNested() && type === 'remove'
+    const buttonClass = classNames("Button", `Button--${type}`, {
+      "Button--main": isMain && type === "add",
+      "Button--absolute": isMain && isNested() && type === "remove",
+      "Button--popup": parentId === "popup",
+      "Button--disabled": parentId === "disabled",
     });
 
     const onButtonClick = callback
-    ? callback : type === 'add'
+      ? callback
+      : type === "add"
       ? isMain
-        ? () => this.togglePopup('Cell')
-        : () => this.togglePopup('Value', parentId)
+        ? () => this.togglePopup("Cell")
+        : () => this.togglePopup("Value", parentId)
       : isMain
-        ? () => this.removeCell(id)
-        : () => this.removeValue(parentId, id);
+      ? () => this.removeCell(id)
+      : () => this.removeValue(parentId, id);
 
-    return <Button
-      buttonClass={buttonClass}
-      onButtonClick={onButtonClick}
-    >
-      <svg
-        className="Button__svg"
-        viewBox="0 0 40 40"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {
-          type === 'add'
-          ? <polyline points="0,15 0,25 15,25 15,40 25,40 25,25 40,25 40,15 25,15 25,0 15,0 15,15" />
-          : <rect x="0" y="12.5" width="40" height="15" />
-        }
-      </svg>
-
-    </Button>
-  }
+    return (
+      <Button
+        buttonClass={buttonClass}
+        onButtonClick={onButtonClick}
+        isDisabled={isDisabled}>
+        <svg
+          className="Button__svg"
+          viewBox="0 0 40 40"
+          xmlns="http://www.w3.org/2000/svg">
+          {type === "add" ? (
+            <polyline points="0,15 0,25 15,25 15,40 25,40 25,25 40,25 40,15 25,15 25,0 15,0 15,15" />
+          ) : (
+            <rect x="0" y="12.5" width="40" height="15" />
+          )}
+        </svg>
+      </Button>
+    );
+  };
 
   renderCell = (id, parentId) => {
+    const {cells} = this.state;
+    const isMain = parentId === "main";
+    const isNested =
+      isMain && cells.find((cell) => cell.id === id).value.length > 1;
+    const cell = cells.find((cell) =>
+      !isNested && !isMain ? cell.id === parentId : cell.id === id
+    );
+    const {category} = cell;
+    const {value} = isNested
+      ? cell
+      : isMain
+      ? cell.value[0]
+      : cell.value.find((value) => value.id === id);
 
-    const { cells } = this.state;
-    const isMain = parentId === 'main';
-    const isNested = isMain && cells.find(cell => cell.id === id).value.length > 1;
-    const cell = cells
-    .find(cell => !isNested && !isMain ? cell.id === parentId : cell.id === id);
-    const { category } = cell;
-    const { value } = isNested
-    ? cell
-    : isMain ? cell.value[0] : cell.value.find(value => value.id === id);
-    
-    return <Cell
-      key={id}
-      id={id}
-      parentId={parentId}
-      renderButton={this.renderButton}
-    >
-      {
-        isNested ?
-
-        <Tree
-          parentName={category}
-          parentId={id}
-          childNodes={value}
-          renderCell={this.renderCell}
-          renderButton={this.renderButton}
-        />
-
-        : isMain ?     
-
-          <h3 className="Cell__heading">
-            {`${category} ${value}`}
-          </h3>
-
-          :
-
-          <h3 className="Cell__heading">
-            {value}
-          </h3>
-      }    
-    </Cell>
-  }
+    return (
+      <Cell
+        key={id}
+        id={id}
+        parentId={parentId}
+        renderButton={this.renderButton}>
+        {isNested ? (
+          <Tree
+            parentName={category}
+            parentId={id}
+            childNodes={value}
+            renderCell={this.renderCell}
+            renderButton={this.renderButton}
+          />
+        ) : isMain ? (
+          <h3 className="Cell__heading">{`${category} ${value}`}</h3>
+        ) : (
+          <h3 className="Cell__heading">{value}</h3>
+        )}
+      </Cell>
+    );
+  };
 
   render() {
     const {
       isAddNewCellPopup,
       isAddNewValuePopup,
       cells,
-      editedCellId
+      editedCellId,
     } = this.state;
 
     return (
@@ -175,23 +165,27 @@ class App extends Component {
           renderButton={this.renderButton}
         />
 
-        { // CELL POPUP
-          isAddNewCellPopup &&
-          <Popup
-            onPopupCancel={() => this.togglePopup('Cell')}
-            onPopupSubmit={this.addCell}
-            renderButton={this.renderButton}
-          /> 
+        {
+          // CELL POPUP
+          isAddNewCellPopup && (
+            <Popup
+              onPopupCancel={() => this.togglePopup("Cell")}
+              onPopupSubmit={this.addCell}
+              renderButton={this.renderButton}
+            />
+          )
         }
 
-        { // VALUE POPUP
-          isAddNewValuePopup &&
-          <Popup
-            editedCellId={editedCellId}
-            onPopupCancel={() => this.togglePopup('Value')}
-            onPopupSubmit={this.addValue}
-            renderButton={this.renderButton}
-          /> 
+        {
+          // VALUE POPUP
+          isAddNewValuePopup && (
+            <Popup
+              editedCellId={editedCellId}
+              onPopupCancel={() => this.togglePopup("Value")}
+              onPopupSubmit={this.addValue}
+              renderButton={this.renderButton}
+            />
+          )
         }
       </div>
     );

@@ -1,91 +1,124 @@
-import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import '../scss/Popup.scss';
+import React, {Component} from "react";
+import classNames from "classnames";
+import {v4 as uuidv4} from "uuid";
+import "../scss/Popup.scss";
 
 class Popup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: '',
+      category: "",
       value: [
         {
           id: uuidv4(),
-          value: ''
+          value: "",
         },
       ],
-      singleValue: ''
-    }
+      singleValue: "",
+      isFormValid: false,
+    };
   }
+
+  validateForm = (id) => {
+    return (
+      this.state.category.length > 0 &&
+      !this.state.value.find((val) => val.value.length === 0 && val.id !== id)
+    );
+  };
 
   handleCategoryInputChange = (value) => {
+    const isFormValid =
+      value.length > 0 &&
+      !this.state.value.find((val) => val.value.length === 0);
+
     this.setState({
-      category: value
+      category: value,
+      isFormValid,
     });
-  }
+  };
 
   handleValueInputChange = (value, id) => {
-    this.setState(prevState => {
-      prevState.value.find(val => val.id === id).value = value;
+    const isFormValid = this.validateForm(id) && value.length > 0;
+
+    this.setState((prevState) => {
+      prevState.value.find((val) => val.id === id).value = value;
       return {
-        value: [...prevState.value]
-      }
+        value: [...prevState.value],
+        isFormValid,
+      };
     });
-  }
+  };
 
   handleSingleValueInputChange = (value) => {
     this.setState({
-      singleValue: value
+      singleValue: value,
+      isFormValid: value.length > 0,
     });
-  }
+  };
 
   addNewValueInput = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       value: [
         ...prevState.value,
         {
           id: uuidv4(),
-          value: ''
-        }
-      ]
+          value: "",
+        },
+      ],
+      isFormValid: false,
     }));
-  }
+  };
+
+  removeValue = (id) => {
+    const isFormValid = this.validateForm(id);
+
+    this.setState((prevState) => ({
+      value: prevState.value.filter((val) => val.id !== id),
+      isFormValid,
+    }));
+  };
 
   handlePopupSubmit = (e) => {
     e.preventDefault();
-    const { category, value, singleValue } = this.state;
-    const { onPopupSubmit, editedCellId } = this.props;
+    const {category, value, singleValue} = this.state;
+    const {onPopupSubmit, editedCellId} = this.props;
 
     if (editedCellId) {
-      onPopupSubmit({
-        id: uuidv4(),
-        value: singleValue
-      }, editedCellId);
-
+      onPopupSubmit(
+        {
+          id: uuidv4(),
+          value: singleValue,
+        },
+        editedCellId
+      );
     } else {
       onPopupSubmit({
         id: uuidv4(),
         category,
-        value
+        value,
       });
     }
-  }
+  };
 
   render() {
-    const { category, value, singleValue } = this.state;
-    const { onPopupCancel, renderButton, editedCellId } = this.props;
-    const heading = editedCellId ? 'Add Value' : 'Add Cell';
+    const {category, value, singleValue, isFormValid} = this.state;
+    const {onPopupCancel, renderButton, editedCellId} = this.props;
+    const heading = editedCellId ? "Add Value" : "Add Cell";
+
+    const addButtonFlag = isFormValid ? "popup" : "disabled";
+    const submitButtonClass = classNames(
+      "Popup__button Popup__button--submit",
+      {
+        "Popup__button--disabled": !isFormValid,
+      }
+    );
 
     return (
       <div className="Popup">
-        <form
-          className="Popup__form"
-          onSubmit={this.handlePopupSubmit}
-        >
+        <form className="Popup__form" onSubmit={this.handlePopupSubmit}>
           <h2 className="Popup__heading">{heading}</h2>
-  
-          {
-            !editedCellId ?
 
+          {!editedCellId ? (
             <>
               {/* CATEGORY */}
               <label htmlFor="popupCategory" className="Popup__label">
@@ -97,38 +130,41 @@ class Popup extends Component {
                 className="Popup__input"
                 value={category}
                 onChange={(e) => this.handleCategoryInputChange(e.target.value)}
-                required
+                autoFocus
               />
-      
+
               {/* VALUES */}
               <label htmlFor="popupValue" className="Popup__label">
                 Value:
               </label>
-              {
-                value.map((value, index) => {
-                  return (
+              {value.map((value, index) => {
+                return (
+                  <React.Fragment key={value.id}>
                     <input
                       key={value.id}
-                      id={index === 0 ? 'popupValue' : value.id}
+                      id={index === 0 ? "popupValue" : value.id}
                       type="text"
                       className="Popup__input"
                       value={value.content}
-                      required
                       onChange={(e) =>
                         this.handleValueInputChange(e.target.value, value.id)
                       }
                     />
-                  );
-                })
-              }
-
-              {
-                renderButton('add', false, null, this.addNewValueInput)
-              }
+                    {index === 0
+                      ? renderButton(
+                          "add",
+                          addButtonFlag,
+                          null,
+                          this.addNewValueInput
+                        )
+                      : renderButton("remove", "popup", null, () =>
+                          this.removeValue(value.id)
+                        )}
+                  </React.Fragment>
+                );
+              })}
             </>
-
-            : 
-
+          ) : (
             <>
               {/* NEW VALUE */}
               <label htmlFor="popupSingleValue" className="Popup__label">
@@ -139,28 +175,25 @@ class Popup extends Component {
                 type="text"
                 className="Popup__input"
                 value={singleValue}
-                onChange={(e) => this.handleSingleValueInputChange(e.target.value)}
-                required
+                onChange={(e) =>
+                  this.handleSingleValueInputChange(e.target.value)
+                }
+                autoFocus
               />
             </>
-          }
-  
-          { // REMOVE BUTTON
-            /* renderRemoveButton(id) */
-          }
-  
+          )}
+
           {/* BUTTONS */}
           <button
             type="submit"
-            className="Popup__button Popup__button--submit"
-          >
-            Submit
+            disabled={!isFormValid}
+            className={submitButtonClass}>
+            Add
           </button>
           <button
             type="button"
             className="Popup__button Popup__button--cancel"
-            onClick={onPopupCancel}
-          >
+            onClick={onPopupCancel}>
             Cancel
           </button>
         </form>

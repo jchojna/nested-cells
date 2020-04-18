@@ -1,9 +1,11 @@
-@import './mixins';
 @import './variables';
+@import './mixins';
+@import './animations';
 
 .Popup {
   @include flex-center;
-  background-color: rgba($color: #000, $alpha: 0.5);
+  animation: popupFadeIn 0.3s forwards;
+  color: $color-dark;
   height: 100%;
   left: 0;
   position: fixed;
@@ -12,20 +14,104 @@
   z-index: 1;
 
   &__form {
+    align-items: center;
+    animation: formFadeIn 0.3s forwards $fade-bezier;
     background-color: #fff;
     border-radius: $corner-radius;
+    box-shadow: 0 0 20px rgba($color: #000, $alpha: 0.3);
+    column-gap: 20px;
     display: grid;
-    gap: 0.5rem;
-    padding: 3rem;
+    grid-template-columns: 40px 1fr 1fr 40px;
+    padding: 4rem;
   }
 
   &__heading {
+    @include gradient ($color-violet, $color-lilac, 0);
+    border-radius: $corner-radius;
+    color: #fff;
+    font-family: 'Brandon Grotesque Bold';
+    font-size: 1.3rem;
+    grid-column: 2 / span 2;
     justify-self: center;
-    color: $color-dark;
     margin: 0;
+    margin-bottom: 1rem;
+    padding: $padding-cell-child;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__label {
+    color: $color-light;
+    font-family: 'Brandon Grotesque Regular';
+    font-size: 1.1rem;
+    grid-column: 2 / span 2;
+
   }
 
   &__input {
+    border: 1px solid $color-light;
+    border-radius: $corner-radius;
+    color: $color-dark;
+    font-size: 1.2rem;
+    grid-column: 2 / span 2;
+    margin: 0.5em 0;
+    outline: none;
+    padding: $padding-cell-child;
 
+    &:focus {
+      border-color: $color-dark;
+      box-shadow: $shadow-cell;
+
+    }
+  }
+
+  &__button {
+    @include gradient ($color-violet, $color-lilac, 0);
+    border: none;
+    border-radius: $corner-radius;
+    box-shadow: $shadow-button;
+    cursor: pointer;
+    color: $color-dark;
+    font-family: 'Brandon Grotesque Bold';
+    font-size: 1.2rem;
+    min-width: 150px;
+    margin-top: 30px;
+    outline: none;
+    padding: $padding-cell-child;
+    transition: background-size 0.5s, box-shadow 0.5s;
+
+    &:focus,
+    &:hover {
+      color: #fff;
+    }
+
+    &--submit {
+      @include background-cut (10px);
+      grid-column: 2;
+
+      &:focus,
+      &:hover {
+        @include gradient ($color-cyan, $color-green, 0);
+        @include background-cut (100%);
+        box-shadow: $shadow-hoverSubmit;
+      }
+    }
+
+    &--cancel {
+      @include background-cut (10px);
+      grid-column: 3;
+
+      &:focus,
+      &:hover {
+        @include gradient ($color-purple, $color-lightPurple, 0);
+        @include background-cut (100%);
+        box-shadow: $shadow-hoverCancel;
+      }
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 }

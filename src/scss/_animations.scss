@@ -1,0 +1,29 @@
+@keyframes popupFadeIn {
+  0% {
+    background-color: rgba($color: #000, $alpha: 0);
+
+  }
+  100% {
+    background-color: rgba($color: #000, $alpha: 0.4);
+  }
+}
+
+@keyframes formFadeIn {
+  0% {
+    transform: scale(0);
+
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cellFadeIn {
+  0% {
+    transform: translate(100%);
+
+  }
+  100% {
+    transform: translate(0);
+  }
+}

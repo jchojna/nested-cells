@@ -14,17 +14,23 @@ $size-mainAddButton: 50px;
 $size-addButton: 40px;
 $size-removeButton: 25px;
 
-$corner-radius: 5px;
-$corner-radius-small: 3px;
+// SHADOWS
 $shadow-cell: 0 2px 10px 5px $color-lightLilac;
-$padding-container: 60px;
+$shadow-button: 0 2px 5px 3px $color-lightLilac;
+$shadow-hoverSubmit: 0 2px 10px 5px rgba($color: $color-cyan, $alpha: 0.4);
+$shadow-hoverCancel: 0 2px 10px 5px rgba($color: $color-purple, $alpha: 0.4);
 
-$width-rootCellHeading: 240px;
+// LAYOUT
+$padding-container: 60px;
 $offset-cellAddButton: 35px;
 $offset-cell: 80px;
 $offset-cell-small: 25px;
-
 $padding-cell-main: 20px;
 $padding-cell-child: 10px;
+$width-rootCellHeading: 240px;
+
+$corner-radius: 5px;
+$corner-radius-small: 3px;
 
 $time-hover: 0.2s;
+$fade-bezier: cubic-bezier(.04,.88,.62,1.17);

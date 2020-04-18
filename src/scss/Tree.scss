@@ -10,6 +10,10 @@
   position: relative;
   width: 100%;
 
+  &--empty {
+    width: auto;
+  }
+
   &::before {
     background-color: $color-light;
     content: '';
@@ -67,6 +71,29 @@
       padding: $padding-cell-child;
       width: calc(100% - #{$offset-cellAddButton + $offset-cell-small});
       word-break: break-all;
+    }
+  }
+
+  @media only screen and (max-width: 720px) {
+    
+    & {
+      align-items: center;
+
+      &--main {
+        padding: 30px;
+      }
+
+      &::before {
+        left: initial;
+      }
+
+      &__heading {
+        width: 100%;
+
+        &--child {
+          align-self: start;
+        }
+      }
     }
   }
 }
