@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import '../scss/Tree.scss';
 
 const Tree = (props) => {
@@ -10,11 +11,20 @@ const Tree = (props) => {
     renderCell,
     renderButton
   } = props;
+
+  const treeClass = classNames('Tree', {
+    'Tree--main': parentId === 'main',
+    'Tree--child': parentId !== 'main'
+  });
+  const headingClass = classNames('Tree__heading', {
+    'Tree__heading--main': parentId === 'main',
+    'Tree__heading--child': parentId !== 'main'
+  });
   
   return (
 
-    <main className="Tree">
-      <h2 className="Tree__heading">{parentName}</h2>
+    <main className={treeClass}>
+      <h2 className={headingClass}>{parentName}</h2>
       {
         childNodes.map(({ id }) => {
           return (

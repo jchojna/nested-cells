@@ -9,9 +9,22 @@ $color-green: #89f29f;
 $color-lightPurple: #f86f95;
 $color-purple: #f34d68;
 
+// BUTTONS
+$size-mainAddButton: 50px;
+$size-addButton: 40px;
+$size-removeButton: 25px;
+
 $corner-radius: 5px;
+$corner-radius-small: 3px;
 $shadow-cell: 0 2px 10px 5px $color-lightLilac;
-$width-rootCell: 240px;
-$width-mainAddButton: 50px;
 $padding-container: 60px;
+
+$width-rootCellHeading: 240px;
+$offset-cellAddButton: 35px;
 $offset-cell: 80px;
+$offset-cell-small: 25px;
+
+$padding-cell-main: 20px;
+$padding-cell-child: 10px;
+
+$time-hover: 0.2s;

@@ -2,4 +2,79 @@
 @import './variables';
 
 .Button {
+  @include flex-center;
+  background-origin: border-box;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  fill: #fff;
+  outline: none;
+  transition: box-shadow $time-hover;
+  z-index: 1;
+
+  &--add {
+    @include gradient ($color-cyan, $color-green, 0);
+    box-shadow:
+      0 0.2em 0.2em 0.1em rgba($color: $color-cyan, $alpha: 0.2);
+    height: $size-addButton;
+    margin-left: $offset-cellAddButton - $size-addButton / 2;
+    margin-top: 1rem;
+    padding: ($size-addButton - 12) / 2;
+    width: $size-addButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+        0 0 0 0.3em rgba($color: #fff, $alpha: 1),
+        0 0 1em 0.2em rgba($color: $color-cyan, $alpha: 0.8);
+    }
+  }
+
+  &--remove {
+    @include gradient ($color-lightPurple, $color-purple, 0);
+    box-shadow:
+      0 0.2em 0.4em 0.1em rgba($color: $color-purple, $alpha: 0.4);
+    height: $size-removeButton;
+    margin-left: 20px;
+    min-width: $size-removeButton;
+    padding: ($size-removeButton - 12) / 2;
+    width: $size-removeButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-purple, $alpha: 0.3),
+        0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+        0 0 0.8em 0.2em rgba($color: $color-purple, $alpha: 0.8);
+    }
+  }
+
+  &--main {
+    box-shadow:
+      0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+      0 0 0 0.2em rgba($color: #fff, $alpha: 1),
+      0 0.2em 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.4);
+    font-size: 3rem;
+    height: $size-mainAddButton;
+    margin-top: 3rem;
+    margin-left: $width-rootCellHeading / 2 - $size-mainAddButton / 2;
+    padding: 15px;
+    width: $size-mainAddButton;
+
+    &:hover {
+      box-shadow:
+        0 0.2em 0.2em rgba($color: $color-cyan, $alpha: 0.3),
+        0 0 0 0.1em rgba($color: #fff, $alpha: 1),
+        0 0 0.6em 0.1em rgba($color: $color-cyan, $alpha: 0.8);
+    }
+  }
+
+  &--absolute {
+    position: absolute;
+    right: $padding-cell-main + $padding-cell-child;
+    top: $padding-cell-main + $padding-cell-child;
+  }
+
+  &__svg {
+    width: 100%;
+  }
 }

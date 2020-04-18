@@ -5,6 +5,11 @@ import Tree from './Tree.js';
 import Cell from './Cell.js';
 import Button from './Button.js';
 import Popup from './Popup.js';
+<<<<<<< HEAD
+=======
+import { initialCells } from '../lib/initialCells';
+import logo from '../assets/svg/hype_logo.svg';
+>>>>>>> 63eff47... feat: add new font
 import '../scss/App.scss';
 
 class App extends Component {
@@ -65,9 +70,15 @@ class App extends Component {
   renderButton = (type, parentId, id, callback) => {
 
     const isMain = parentId === 'main';
+    const isNested = () => {
+      return type === 'remove' && isMain
+      ? this.state.cells.find(cell => cell.id === id).value.length > 1
+      : false;
+    }
 
-    const buttonClass = classNames('button', `button--${type}`, {
-      'button--main': isMain
+    const buttonClass = classNames('Button', `Button--${type}`, {
+      'Button--main': isMain && type === 'add',
+      'Button--absolute': isMain && isNested() && type === 'remove'
     });
 
     const onButtonClick = callback
@@ -84,7 +95,7 @@ class App extends Component {
       onButtonClick={onButtonClick}
     >
       <svg
-        className="button__svg"
+        className="Button__svg"
         viewBox="0 0 40 40"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -123,7 +134,6 @@ class App extends Component {
           parentName={category}
           parentId={id}
           childNodes={value}
-          onAddButtonClick={() => {console.log('add')}}
           renderCell={this.renderCell}
           renderButton={this.renderButton}
         />
@@ -168,8 +178,6 @@ class App extends Component {
         { // CELL POPUP
           isAddNewCellPopup &&
           <Popup
-            type="newCell"
-            editedCellId={null}
             onPopupCancel={() => this.togglePopup('Cell')}
             onPopupSubmit={this.addCell}
             renderButton={this.renderButton}
@@ -179,7 +187,6 @@ class App extends Component {
         { // VALUE POPUP
           isAddNewValuePopup &&
           <Popup
-            type="newValue"
             editedCellId={editedCellId}
             onPopupCancel={() => this.togglePopup('Value')}
             onPopupSubmit={this.addValue}
