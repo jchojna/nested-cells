@@ -1,13 +1,10 @@
 // COLORS
-$color-light: #b7bdca;
-$color-dark: #4b597b;
-$color-lightLilac: #f0f2ff;
-$color-lilac: #a576f4;
-$color-violet: #7276f7;
-$color-cyan: #29e8e6;
-$color-green: #89f29f;
-$color-lightPurple: #f86f95;
-$color-purple: #f34d68;
+$color-light: #c9c9c9;
+$color-dark: #575757;
+$color-lilac: #b49fd4;
+$color-violet: #62649c;
+$color-cyan: #dfd68b;
+$color-green: #a18843;
 
 // BUTTONS
 $size-mainAddButton: 50px;
@@ -15,10 +12,10 @@ $size-addButton: 40px;
 $size-removeButton: 25px;
 
 // SHADOWS
-$shadow-cell: 0 2px 10px 5px $color-lightLilac;
-$shadow-button: 0 2px 5px 3px $color-lightLilac;
-$shadow-hoverSubmit: 0 2px 10px 5px rgba($color: $color-cyan, $alpha: 0.4);
-$shadow-hoverCancel: 0 2px 10px 5px rgba($color: $color-purple, $alpha: 0.4);
+$shadow-size: 0 2px 6px;
+$shadow-cell: $shadow-size $color-light;
+$shadow-button: $shadow-size $color-light;
+$shadow-hoverSubmit: $shadow-size rgba($color: $color-cyan, $alpha: 0.4);
 
 // LAYOUT
 $padding-container: 60px;
@@ -28,6 +25,7 @@ $offset-cell-small: 25px;
 $padding-cell-main: 20px;
 $padding-cell-child: 10px;
 $width-rootCellHeading: 240px;
+$size-popupButton: 30px;
 
 $corner-radius: 5px;
 $corner-radius-small: 3px;

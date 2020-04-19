@@ -23,7 +23,7 @@
 
   &--main {
     background-color: #fff;
-    box-shadow: 0 2px 30px 5px $color-lightLilac;
+    box-shadow: 0 2px 6px $color-light;
     padding: $padding-container;
 
     &::before {
@@ -52,8 +52,8 @@
       border-radius: $corner-radius;
       box-shadow: $shadow-cell;
       color: #fff;
-      font-family: 'Brandon Grotesque Bold';
       font-size: 1.4rem;
+      font-weight: 700;
       margin-bottom: 2.5rem;
       padding: 0.8em;
       width: $width-rootCellHeading;
@@ -65,6 +65,7 @@
       border-radius: $corner-radius-small;
       color: $color-dark;
       font-size: 1.2rem;
+      font-weight: 700;
       justify-content: flex-start;
       margin-bottom: 1.2rem;
       min-height: $padding-cell-child * 2 + $size-removeButton;
@@ -88,7 +89,9 @@
       }
 
       &__heading {
-        width: 100%;
+        &--main {
+          width: 100%;
+        }
 
         &--child {
           align-self: start;

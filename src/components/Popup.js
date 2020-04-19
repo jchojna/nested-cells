@@ -20,9 +20,10 @@ class Popup extends Component {
   }
 
   validateForm = (id) => {
+    const { category, value } = this.state;
     return (
-      this.state.category.length > 0 &&
-      !this.state.value.find((val) => val.value.length === 0 && val.id !== id)
+      category.length > 0 &&
+      !value.find((val) => val.value.length === 0 && val.id !== id)
     );
   };
 
@@ -144,7 +145,7 @@ class Popup extends Component {
                       key={value.id}
                       id={index === 0 ? "popupValue" : value.id}
                       type="text"
-                      className="Popup__input"
+                      className="Popup__input Popup__input--value"
                       value={value.content}
                       onChange={(e) =>
                         this.handleValueInputChange(e.target.value, value.id)

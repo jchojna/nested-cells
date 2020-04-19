@@ -11,16 +11,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cells: [],
+      cells: initialCells,
       isAddNewCellPopup: false,
       isAddNewValuePopup: false,
       editedCellId: null,
     };
   }
-
-  componentDidMount = () => {
-    this.setState({cells: initialCells});
-  };
 
   togglePopup = (type, parentId) => {
     this.setState((prevState) => ({
@@ -134,10 +130,10 @@ class App extends Component {
             renderCell={this.renderCell}
             renderButton={this.renderButton}
           />
-        ) : isMain ? (
-          <h3 className="Cell__heading">{`${category} ${value}`}</h3>
         ) : (
-          <h3 className="Cell__heading">{value}</h3>
+          <h3 className="Cell__heading">
+            {isMain ? `${category} ${value}` : value}
+          </h3>
         )}
       </Cell>
     );
