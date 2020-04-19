@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/nested-cells/static/css/main.fc061065.chunk.css",
+    "main.js": "/nested-cells/static/js/main.3282d68a.chunk.js",
+    "main.js.map": "/nested-cells/static/js/main.3282d68a.chunk.js.map",
+    "runtime-main.js": "/nested-cells/static/js/runtime-main.12790b5c.js",
+    "runtime-main.js.map": "/nested-cells/static/js/runtime-main.12790b5c.js.map",
+    "static/js/2.b6117b57.chunk.js": "/nested-cells/static/js/2.b6117b57.chunk.js",
+    "static/js/2.b6117b57.chunk.js.map": "/nested-cells/static/js/2.b6117b57.chunk.js.map",
+    "index.html": "/nested-cells/index.html",
+    "precache-manifest.b690e3cd8a438c788b730d60473962e3.js": "/nested-cells/precache-manifest.b690e3cd8a438c788b730d60473962e3.js",
+    "service-worker.js": "/nested-cells/service-worker.js",
+    "static/css/main.fc061065.chunk.css.map": "/nested-cells/static/css/main.fc061065.chunk.css.map",
+    "static/js/2.b6117b57.chunk.js.LICENSE.txt": "/nested-cells/static/js/2.b6117b57.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/nested-cells/static/media/Brandon_reg.1f55925e.otf",
+    "static/media/App.scss": "/nested-cells/static/media/background.6d144df9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.12790b5c.js",
+    "static/js/2.b6117b57.chunk.js",
+    "static/css/main.fc061065.chunk.css",
+    "static/js/main.3282d68a.chunk.js"
+  ]
+}
