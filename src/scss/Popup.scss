@@ -30,8 +30,8 @@
     @include gradient ($color-violet, $color-lilac, 0);
     border-radius: $corner-radius;
     color: #fff;
-    font-family: 'Brandon Grotesque Bold';
     font-size: 1.3rem;
+    font-weight: 700;
     grid-column: 2 / span 2;
     justify-self: center;
     margin: 0;
@@ -43,7 +43,6 @@
 
   &__label {
     color: $color-light;
-    font-family: 'Brandon Grotesque Regular';
     font-size: 1.1rem;
     grid-column: 2 / span 2;
 
@@ -54,6 +53,7 @@
     border-radius: $corner-radius;
     color: $color-dark;
     font-size: 1.2rem;
+    font-weight: 700;
     grid-column: 2 / span 2;
     margin: 0.5em 0;
     outline: none;
@@ -73,8 +73,8 @@
     box-shadow: $shadow-button;
     cursor: pointer;
     color: $color-dark;
-    font-family: 'Brandon Grotesque Bold';
     font-size: 1.2rem;
+    font-weight: 500;
     min-width: 150px;
     margin-top: 30px;
     outline: none;
