@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nested-cells/precache-manifest.b690e3cd8a438c788b730d60473962e3.js"
+  "/nested-cells/precache-manifest.7ff514e8a1be240a8343347adfc14692.js"
 );
 
 self.addEventListener('message', (event) => {
